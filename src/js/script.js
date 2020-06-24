@@ -61,6 +61,7 @@
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
+      thisProduct.initAccordion();
 
       console.log('new Product', thisProduct);
     }
@@ -70,8 +71,23 @@
       const generatedHTML = templates.menuProduct(thisProduct.data);
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
       const menuContainer = document.querySelector(select.containerOf.menu);
-      menuContainer.appendChild(thisProduct.element);
+      menuContainer.appendChild(thisProduct.element);  
+    }
+
+    initAccordion(){
+      const thisProduct = this;
       
+      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      clickableTrigger.addEventListener('click', function(){
+        event.preventDefault();
+        thisProduct.element.classList.toggle('active');
+        const activeProducts = document.querySelectorAll(select.all.menuProductsActive);
+        for(let activeProduct of activeProducts){
+          if(activeProduct != thisProduct.element){
+            activeProduct.classList.remove('active');
+          }
+        }
+      });
     }
 
   }
