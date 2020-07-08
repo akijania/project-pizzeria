@@ -338,8 +338,8 @@
       const url = settings.db.url + '/' + settings.db.order;
 
       const payload = {
-        phone: thisCart.phone,
-        address: thisCart.address,
+        phone: thisCart.phone.value,
+        address: thisCart.address.value,
         totalNumber: thisCart.totalNumber,
         subtotalPrice: thisCart.subtotalPrice,
         totalPrice: thisCart.totalPrice,
@@ -347,7 +347,7 @@
         products: [],
       };
       for(let product of thisCart.products){
-        product.getData();
+        payload.products.push(product.getData());
       }
 
       const options = {
