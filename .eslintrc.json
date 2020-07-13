@@ -1,6 +1,7 @@
 {
     "globals": {
-        "Handlebars": false
+        "Handlebars": false,
+        "flatpickr": false
       },
     "env": {
         "browser": true,
