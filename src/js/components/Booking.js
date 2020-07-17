@@ -133,10 +133,31 @@ export class Booking{
       } 
       else {
         table.classList.remove(classNames.booking.tableBooked);
+        thisBooking.bookTable(table);
+        
       }
       
 
     }
+  }
+  bookTable(table){
+    const thisBooking = this;
+   
+    table.addEventListener('click', function(){
+      const thisTable = this;
+      thisTable.classList.add(classNames.booking.tableBooked);
+      const bookedTable = thisTable.getAttribute(settings.booking.tableIdAttribute);
+      console.log('booked', bookedTable);
+
+      thisBooking.dom.datePicker.addEventListener('click', function(){
+        thisTable.classList.remove(classNames.booking.tableBooked);
+      });
+      thisBooking.dom.hourPicker.addEventListener('click', function(){
+        thisTable.classList.remove(classNames.booking.tableBooked);
+      });
+      return bookedTable;
+
+    });
   }
     
 
@@ -156,6 +177,7 @@ export class Booking{
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.form = thisBooking.dom.wrapper.querySelector(select.booking.form);
   }
 
   initWidgets(){
@@ -169,6 +191,46 @@ export class Booking{
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
     });
+    thisBooking.dom.form.addEventListener('submit',function(event){
+      event.preventDefault();
+      thisBooking.sendOrder();
+    });
+
+    
   }
+  sendOrder(){
+    const thisBooking = this;
+    thisBooking.dom.people = document.querySelector(select.booking.people);
+    thisBooking.dom.duration = document.querySelector(select.booking.duration);
+
+    const url = settings.db.url + '/' + settings.db.booking;
+    
+
+    const payload = {
+      date: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
+      table: 1,
+      duration: thisBooking.dom.duration.value,
+      ppl: thisBooking.dom.people.value,
+      starters: []
+
+    };
+   
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+    fetch(url,options)
+      .then(function(response){
+        return response.json();
+      }).then(function(parsedResponse){
+        console.log('parsedResponse', parsedResponse);
+      });
+  }
+
 
 }
