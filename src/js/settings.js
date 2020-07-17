@@ -52,6 +52,7 @@ export const select = {
     formSubmit: '.cart__order [type="submit"]',
     phone: '[name="phone"]',
     address: '[name="address"]',
+    
   },
   cartProduct: {
     amountWidget: '.widget-amount',
@@ -64,10 +65,11 @@ export const select = {
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
     form: '.booking-form',
-    phone: '[name="phone"]',
-    address: '[name="address"]',
+    phone: '.order-confirmation input[name="phone"]',
+    address: '.order-confirmation input[name="address"]',
     people: '.people-amount input',
-    duration: '.hours-amount input'
+    duration: '.hours-amount input',
+    starters: 'input[name="starter"]'
   
 
   },

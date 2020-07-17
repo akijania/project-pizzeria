@@ -36,6 +36,8 @@ class DatePicker extends BaseWidget{
       onChange: function(minDate, dateStr) {
         console.log(minDate);
         console.log(dateStr);
+        thisWidget.value = dateStr;
+
       },
       
      

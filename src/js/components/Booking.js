@@ -146,8 +146,7 @@ export class Booking{
     table.addEventListener('click', function(){
       const thisTable = this;
       thisTable.classList.add(classNames.booking.tableBooked);
-      const bookedTable = thisTable.getAttribute(settings.booking.tableIdAttribute);
-      console.log('booked', bookedTable);
+      thisBooking.bookedTable = thisTable.getAttribute(settings.booking.tableIdAttribute);
 
       thisBooking.dom.datePicker.addEventListener('click', function(){
         thisTable.classList.remove(classNames.booking.tableBooked);
@@ -155,7 +154,6 @@ export class Booking{
       thisBooking.dom.hourPicker.addEventListener('click', function(){
         thisTable.classList.remove(classNames.booking.tableBooked);
       });
-      return bookedTable;
 
     });
   }
@@ -202,6 +200,9 @@ export class Booking{
     const thisBooking = this;
     thisBooking.dom.people = document.querySelector(select.booking.people);
     thisBooking.dom.duration = document.querySelector(select.booking.duration);
+    thisBooking.dom.phone = document.querySelector(select.booking.phone);
+    thisBooking.dom.address = document.querySelector(select.booking.address);
+    thisBooking.dom.starters = document.querySelectorAll(select.booking.starters);
 
     const url = settings.db.url + '/' + settings.db.booking;
     
@@ -209,12 +210,22 @@ export class Booking{
     const payload = {
       date: thisBooking.datePicker.value,
       hour: thisBooking.hourPicker.value,
-      table: 1,
+      table: parseInt(thisBooking.bookedTable),
       duration: thisBooking.dom.duration.value,
       ppl: thisBooking.dom.people.value,
-      starters: []
+      starters: [],
+      phone: thisBooking.dom.phone.value,
+      address: thisBooking.dom.address.value,
 
     };
+    for(let starter of thisBooking.dom.starters){
+      console.log('starter', starter);
+      if(starter.checked){
+        payload.starters.push(starter.value);
+      }
+      
+    }
+  
    
 
     const options = {
@@ -227,8 +238,9 @@ export class Booking{
     fetch(url,options)
       .then(function(response){
         return response.json();
-      }).then(function(parsedResponse){
-        console.log('parsedResponse', parsedResponse);
+      }).then(function(){
+        thisBooking.getData();
+        // console.log('parsedResponse', parsedResponse);
       });
   }
 
