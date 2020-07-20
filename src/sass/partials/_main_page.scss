@@ -1,0 +1,90 @@
+
+$transition: all 1s;
+
+.main-page-wrapper {
+    margin: ($base-size * 3.5) auto;
+      padding: ($base-size * 6) ($base-size * 4);
+      background: $color-light;
+      border-bottom: 1px solid lighten($color-dark, 70%); 
+      border-radius: $radius;
+    }
+
+.links-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+.links-card p {
+    display: none;
+  }
+  .links-card:hover p {
+    display: inline-block;
+    padding-top: 10px;
+    margin-bottom: 0px;
+  }
+
+
+.links-card {
+    color: white;
+    text-align: center;
+
+}
+
+.body-hours {
+  height: 120px;
+  background-color: $color-main;
+  color: white;
+
+}
+.carousel-pizza {
+    height: 300px;
+}
+.carousel-pizza img{
+    height: 250px;
+    object-fit: cover;
+}
+.gallery .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    z-index: 0;
+}
+.gallery .card::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%; 
+    background-color: black;
+    opacity: 0;
+    z-index: 1;
+    transition: $transition;
+        
+
+}
+.gallery .card:hover::after {
+    opacity: 0.7;
+}
+.gallery .card:hover i {
+    opacity: 1;
+    opacity: 1;
+}
+.gallery .card-body {
+    z-index: 2;
+}
+
+.gallery .card i{
+    transition: $transition;
+    z-index: 2;
+    opacity: 1;
+    color: $color-main;
+    font-size: 20px;
+    opacity: 0;
+    &:last-of-type{
+        color: white;
+    }
+}
+
+
+.gallery a {
+    color: $color-main;
+}

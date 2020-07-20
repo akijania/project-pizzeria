@@ -240,7 +240,6 @@ export class Booking{
         return response.json();
       }).then(function(){
         thisBooking.getData();
-        // console.log('parsedResponse', parsedResponse);
       });
   }
 
