@@ -29,7 +29,7 @@ class BaseWidget{
     thisWidget.value = value;  
   }
   parseValue(value){
-    return parseInt(value);
+    return parseFloat(value);
   }
   isValid(value){
     return !isNaN(value);

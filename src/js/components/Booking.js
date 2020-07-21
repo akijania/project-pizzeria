@@ -181,8 +181,8 @@ export class Booking{
   initWidgets(){
     const thisBooking = this;
     
-    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
-    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);     
+    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount,1);
+    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount, 0.5);     
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker); 
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
