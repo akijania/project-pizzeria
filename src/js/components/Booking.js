@@ -164,19 +164,21 @@ export class Booking{
     });
   }
 
+
+
   unbookedDuration(tableId){
     const thisBooking = this;
+    const notBooked = function(hour){
+      typeof thisBooking.booked[thisBooking.date][hour] == 'undefined' || 
+      thisBooking.booked[thisBooking.date][hour].includes(tableId) == false;
+    };
     let duration = 0;
-    for (let hourBlock = thisBooking.hour; hourBlock < 24; hourBlock += 0.5){
-      if (typeof thisBooking.booked[thisBooking.date][hourBlock] == 'undefined'){
-        duration += 0.5;
-      } else if(thisBooking.booked[thisBooking.date][hourBlock].includes(tableId) == false){
-        duration += 0.5;
-      }
-      return duration;
-     
-  
-    }    
+    for (let hourBlock = thisBooking.hour; hourBlock < 24 && notBooked(hourBlock); hourBlock += 1){
+      
+      duration += 0.5;
+    }
+    return duration;
+        
   }
     
 
