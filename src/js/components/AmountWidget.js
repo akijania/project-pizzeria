@@ -7,6 +7,8 @@ class AmountWidget extends BaseWidget{
 
     const thisWidget = this;
 
+    thisWidget.unbookedDuration = settings.amountWidget.defaultMax;
+
     thisWidget.getElements(element);
 
     thisWidget.initActions(step);
@@ -23,8 +25,10 @@ class AmountWidget extends BaseWidget{
   }
 
   isValid(value){
+    const thisWidget = this;
     return !isNaN(value)
-    && value >= settings.amountWidget.defaultMin 
+    && value >= settings.amountWidget.defaultMin
+    && value <= thisWidget.unbookedDuration 
     && value <= settings.amountWidget.defaultMax;
   }
   renderValue(){

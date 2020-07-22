@@ -148,6 +148,12 @@ export class Booking{
       thisTable.classList.add(classNames.booking.tableBooked);
       thisBooking.bookedTable = thisTable.getAttribute(settings.booking.tableIdAttribute);
 
+      let tableId = thisTable.getAttribute(settings.booking.tableIdAttribute);
+      if(!isNaN(tableId)){
+        tableId = parseInt(tableId);
+      }
+      thisBooking.hoursAmount.unbookedDuration = thisBooking.unbookedDuration(tableId);
+
       thisBooking.dom.datePicker.addEventListener('click', function(){
         thisTable.classList.remove(classNames.booking.tableBooked);
       });
@@ -156,6 +162,21 @@ export class Booking{
       });
 
     });
+  }
+
+  unbookedDuration(tableId){
+    const thisBooking = this;
+    let duration = 0;
+    for (let hourBlock = thisBooking.hour; hourBlock < 24; hourBlock += 0.5){
+      if (typeof thisBooking.booked[thisBooking.date][hourBlock] == 'undefined'){
+        duration += 0.5;
+      } else if(thisBooking.booked[thisBooking.date][hourBlock].includes(tableId) == false){
+        duration += 0.5;
+      }
+      return duration;
+     
+  
+    }    
   }
     
 
@@ -181,7 +202,7 @@ export class Booking{
   initWidgets(){
     const thisBooking = this;
     
-    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount,1);
+    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount, 1);
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount, 0.5);     
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker); 
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
