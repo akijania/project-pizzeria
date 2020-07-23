@@ -156,26 +156,34 @@ export class Booking{
 
       thisBooking.dom.datePicker.addEventListener('click', function(){
         thisTable.classList.remove(classNames.booking.tableBooked);
+        thisBooking.updateDOM();
       });
       thisBooking.dom.hourPicker.addEventListener('click', function(){
         thisTable.classList.remove(classNames.booking.tableBooked);
+        thisBooking.updateDOM();
       });
 
     });
   }
 
-
-
   unbookedDuration(tableId){
     const thisBooking = this;
-    const notBooked = function(hour){
-      typeof thisBooking.booked[thisBooking.date][hour] == 'undefined' || 
-      thisBooking.booked[thisBooking.date][hour].includes(tableId) == false;
-    };
+    thisBooking.inputHours = document.querySelector(select.booking.duration);
+    thisBooking.inputHours.value = 1;
+
+
     let duration = 0;
-    for (let hourBlock = thisBooking.hour; hourBlock < 24 && notBooked(hourBlock); hourBlock += 1){
-      
-      duration += 0.5;
+    for (let hourBlock = thisBooking.hour; hourBlock < 24; hourBlock += 0.5){
+      console.log('booking', thisBooking.booked[thisBooking.date][hourBlock]);
+      if(typeof thisBooking.booked[thisBooking.date][hourBlock] == 'undefined'){
+        duration += 0.5;
+        console.log('duration',duration);
+
+      }else if(thisBooking.booked[thisBooking.date][hourBlock].includes(tableId) == false){
+        duration += 0.5;
+        console.log('duration',duration);
+      }else{
+        break; }    
     }
     return duration;
         
