@@ -168,9 +168,6 @@ export class Booking{
 
   unbookedDuration(tableId){
     const thisBooking = this;
-    // thisBooking.inputHours = document.querySelector(select.booking.duration);
-    // thisBooking.inputHours.value = 1;
-
 
     let duration = 0;
     for (let hourBlock = thisBooking.hour; hourBlock < 24; hourBlock += 0.5){
