@@ -1,1 +1,1 @@
-https://blooming-fjord-08456.herokuapp.com/#/booking
+https://blooming-fjord-08456.herokuapp.com
