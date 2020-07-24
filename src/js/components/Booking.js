@@ -152,6 +152,7 @@ export class Booking{
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
       }
+      thisBooking.resetDuration();
       thisBooking.hoursAmount.unbookedDuration = thisBooking.unbookedDuration(tableId);
 
       thisBooking.dom.datePicker.addEventListener('click', function(){
@@ -165,9 +166,15 @@ export class Booking{
 
     });
   }
+  resetDuration(){
+    const thisBooking = this;
+    thisBooking.hoursAmount.unbookedDuration = settings.amountWidget.defaultMax;
+    thisBooking.hoursAmount.setValue(settings.amountWidget.defaultMin);
 
+  }
   unbookedDuration(tableId){
     const thisBooking = this;
+
 
     let duration = 0;
     for (let hourBlock = thisBooking.hour; hourBlock < 24; hourBlock += 0.5){

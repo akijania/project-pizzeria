@@ -22,7 +22,6 @@ class AmountWidget extends BaseWidget{
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
     thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
     thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
-    thisWidget.dom.tables = document.querySelectorAll(select.booking.tables);
   }
 
   isValid(value){
@@ -54,12 +53,6 @@ class AmountWidget extends BaseWidget{
       event.preventDefault();
       thisWidget.setValue(thisWidget.value + step);
     });
-    for(let table of thisWidget.dom.tables){
-      table.addEventListener('click', function(){
-        thisWidget.unbookedDuration = settings.amountWidget.defaultMax;
-        thisWidget.setValue(settings.amountWidget.defaultValue);
-      });
-    }
 
   }
   
