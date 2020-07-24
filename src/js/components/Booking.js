@@ -221,9 +221,14 @@ export class Booking{
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker); 
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
-    thisBooking.dom.wrapper.addEventListener('updated', function(){
+    thisBooking.dom.datePicker.addEventListener('updated', function(){
       thisBooking.updateDOM();
     });
+    thisBooking.dom.hourPicker.addEventListener('updated', function(){
+      thisBooking.updateDOM();
+    });
+
+
     thisBooking.dom.form.addEventListener('submit',function(event){
       event.preventDefault();
       thisBooking.sendOrder();
